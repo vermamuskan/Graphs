@@ -1,0 +1,67 @@
+class Sol {
+    public static class pair{
+        int u,v;
+        pair(int u,int v){
+            u=u;
+            v=v;
+        }
+    }
+    public boolean canMeasureWater(int x, int y, int z) {
+        if(z>x&&z>y)return false;
+        boolean aa=false;
+        Queue<pair> q=new LinkedList<>();
+       // LinkedList<pair> ans =new LinkedList<>();
+        HashSet<pair> map=new HashSet<>(); 
+        pair p=new pair(0,0);
+        q.add(p);
+        int a=0,b=0;
+        while(q.size()!=0){
+            pair xx=q.remove();
+            if(map.contains(xx))continue;
+            if(xx.u>x||xx.u<0||xx.v>y||xx.v<0)continue;
+           // if(!map.containsKey(xx)){
+            map.add(xx);
+            //ans.add(xx);
+            if(xx.u==z||xx.v==z||xx.v+xx.u==z){
+               /* if(xx.u==z)
+                ans.add(new pair(z,0));
+            
+                else ans.add(new pair(0,z));
+                //return true;
+                */
+                aa=true;
+                break;
+                
+            }
+                
+            q.add(new pair(x,xx.v));
+            q.add(new pair(xx.u,y));
+            for(int i=0;i<=Math.max(x,y);i++){
+                a=xx.u-i;
+                b=xx.v+i;
+                if((a==0&&a>=0)||b==y){
+                    q.add(new pair(a,b));
+                }
+                
+                
+                a=xx.u+i;
+                b=xx.v-i;
+                if(a==x||(b==0&&b>=0)){
+                    q.add(new pair(a,b));
+                }
+                
+            }
+                q.add(new pair(0,xx.v));
+                q.add(new pair(xx.u,0));
+                
+              
+                
+                
+            
+            
+        }
+        return aa;
+        
+        
+    }
+}
